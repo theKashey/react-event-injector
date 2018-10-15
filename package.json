@@ -1,0 +1,44 @@
+{
+  "name": "react-event-injector",
+  "version": "1.0.0",
+  "description": "React way to addEventListener",
+  "main": "dist/es5/index.js",
+  "scripts": {
+    "test": "ts-react-toolbox test",
+    "bootstrap": "ts-react-toolbox init",
+    "dev": "ts-react-toolbox dev",
+    "test:ci": "ts-react-toolbox test --runInBand --coverage",
+    "build": "ts-react-toolbox build",
+    "release": "ts-react-toolbox release",
+    "lint": "ts-react-toolbox lint",
+    "static": "ts-react-toolbox publish",
+    "format": "ts-react-toolbox format",
+    "analyze": "ts-react-toolbox analyze"
+  },
+  "author": "Anton Korzunov <thekashey@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "ts-react-toolbox": "^0.1.21"
+  },
+  "engines": {
+    "node": ">=8.5.0"
+  },
+  "peerDependencies": {
+    "react": "^16.3.0"
+  },
+  "jsnext:main": "dist/es2015/index.js",
+  "module": "dist/es2015/index.js",
+  "types": "dist/es5/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "react",
+    "event",
+    "passive",
+    "manager",
+    "observer",
+    "event listener"
+  ],
+  "homepage": "https://github.com/theKashey/react-event-injector#readme"
+}
