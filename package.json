@@ -18,6 +18,7 @@
   "author": "Anton Korzunov <thekashey@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "size-limit": "^0.20.1",
     "ts-react-toolbox": "^0.1.21"
   },
   "engines": {
@@ -39,6 +40,12 @@
     "manager",
     "observer",
     "event listener"
+  ],
+  "size-limit": [
+    {
+      "path": "dist/es5/index.js",
+      "limit": "1.5 KB"
+    }
   ],
   "homepage": "https://github.com/theKashey/react-event-injector#readme"
 }

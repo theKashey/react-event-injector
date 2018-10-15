@@ -13,7 +13,7 @@
 </div>  
 
 -----
-Declarative React event manager.
+Declarative React event manager, slim as 1kb.
 
 # API
 There is 3 Components, exported from this package
