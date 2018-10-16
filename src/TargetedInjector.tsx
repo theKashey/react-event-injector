@@ -1,5 +1,7 @@
 import * as React from 'react';
 import {EventInjector, InjectorProps} from "./Injector";
+import {eventTypes} from "./propTypes";
+import {oneOfType, func, any} from "prop-types";
 
 type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 type TargetedProps<T> = Omit<InjectorProps<T>, 'children'> & {
@@ -8,21 +10,26 @@ type TargetedProps<T> = Omit<InjectorProps<T>, 'children'> & {
 }
 
 export class TargetedInjector<T extends EventTarget> extends React.Component<TargetedProps<T>> {
+  static propTypes = {
+    ...eventTypes,
+    target: oneOfType([func, any]),
+  };
+
   ref = React.createRef<EventTarget>();
 
-  componentDidMount(){
+  componentDidMount() {
     // schedule an update;
     this.setState({});
   }
 
   addEventListener = (name: string, cb: any, options: boolean | AddEventListenerOptions) => {
-    if(this.ref.current) {
+    if (this.ref.current) {
       this.ref.current.addEventListener(name, cb, options);
     }
   };
 
   removeEventListener = (name: string, cb: any, options: boolean | AddEventListenerOptions) => {
-    if(this.ref.current) {
+    if (this.ref.current) {
       this.ref.current.removeEventListener(name, cb, options);
     }
   };

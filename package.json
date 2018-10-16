@@ -47,5 +47,8 @@
       "limit": "1.5 KB"
     }
   ],
-  "homepage": "https://github.com/theKashey/react-event-injector#readme"
+  "homepage": "https://github.com/theKashey/react-event-injector#readme",
+  "dependencies": {
+    "prop-types": "^15.6.2"
+  }
 }

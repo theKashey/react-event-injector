@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {attach, CallEvent, detach, getEventNames} from "./eventManager";
+import {eventTypes, injectorTypes} from "./propTypes";
 
 export type CallbackRef = (ref: EventTarget | null) => any;
 type RenderCallback = (ref: CallbackRef) => React.ReactNode | null;
@@ -10,19 +11,22 @@ export type InjectorProps<T> = {
   pure?: any;
 } & React.DOMAttributes<T>;
 
-
-type State = {
-  injectedEvents: Array<CallEvent>;
+interface State {
+  injectedEvents: CallEvent[];
 };
 
-function pick<T extends object>(names: Array<keyof T>, data: T, options: any): Array<CallEvent> {
+function pick<T extends object>(names: Array<keyof T>, data: T, options: any): CallEvent[] {
   return names.reduce((acc, name) => {
-    acc.push({name, options, cb: data[name]} as CallEvent);
+    acc.push({name, options, cb: data[name]});
     return acc;
-  }, [] as Array<CallEvent>);
+  }, [] as CallEvent[]);
 }
 
 export class EventInjector<T extends EventTarget> extends React.Component<InjectorProps<T>, State> implements EventTarget {
+  static propTypes = {
+    ...eventTypes,
+    ...injectorTypes,
+  };
   ref: EventTarget | null = null;
   state: State = {
     injectedEvents: []
@@ -39,8 +43,7 @@ export class EventInjector<T extends EventTarget> extends React.Component<Inject
     const {props} = this;
     const {pure} = props;
 
-    if (pure && pure === oldProps.pure) {
-    } else {
+    if (!(pure && pure === oldProps.pure)) {
       const {settings: oldSettings = {}} = oldProps;
       const toRemove = getEventNames(oldProps).filter(name => oldProps[name] !== props[name] && oldProps[name]);
       if (this.ref) {

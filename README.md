@@ -58,14 +58,18 @@ import {EventInjector} from 'react-event-injector';
  <div>It will inject onClick on me, please pass a SINGLE and HTML tag inside injector</div>
 </EventInjector> 
 ```
-- You may nest Injectors one inside another
+- You may nest Injectors one inside another. Injectors __is the only way__ to combine,
+`passive`, `active`, and `neutral` event listeners.
+> All injectors implements EventTarget interface, and could be `ref`-ed by another injectors.
 ```js
-import {EventInjector} from 'react-event-injector';
-<EventInjector onClick={event}>
-  <EventInjector onKeydownCapture={event}>
-    <div>It will inject onClick on me, please pass a SINGLE and HTML tag inside injector</div>
-  </EventInjector>
-</EventInjector>  
+import {PassiveListener, EventInjector} from 'react-event-injector';
+<PassiveListener onScroll={event}>
+  <EventInjector onClick={event}>
+    <EventInjector onKeydownCapture={event}>
+      <div>It will inject onClick on me, please pass a SINGLE and HTML tag inside injector</div>
+    </EventInjector>
+  </EventInjector>  
+</PassiveListener>
 ```
 
 ### Children as RenderProp

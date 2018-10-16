@@ -2,7 +2,7 @@ import {isPassiveSupported} from "./flags";
 import {addEventListener, removeEventListener} from "./eventListeners";
 
 type Callback = (name: string, cb: any, options: AddEventListenerOptions, settings: AddEventListenerOptions) => any;
-export type CallEvent = {
+export interface CallEvent {
   name: string,
   cb: any,
   options: boolean | AddEventListenerOptions
@@ -40,7 +40,7 @@ export function getEventNames<T extends object>(names: T): Array<keyof T> {
     .filter(name => name.indexOf('on') === 0) as any;
 };
 
-export const forEventsIn = (events: Array<CallEvent>, cb: Callback) => {
+export const forEventsIn = (events: CallEvent[], cb: Callback) => {
   events.forEach(event => {
     const {name} = event;
     const lowerName = name.toLowerCase();
@@ -52,14 +52,14 @@ export const forEventsIn = (events: Array<CallEvent>, cb: Callback) => {
   });
 };
 
-export const attach = (ref: EventTarget, events: Array<CallEvent>) => {
+export const attach = (ref: EventTarget, events: CallEvent[]) => {
   forEventsIn(
     events,
     (name, cb, options, settings) => addEventListener(ref, name, cb, asOption({...settings, ...options}))
   );
 };
 
-export const detach = (ref: EventTarget, events: Array<CallEvent>) => {
+export const detach = (ref: EventTarget, events: CallEvent[]) => {
   forEventsIn(
     events,
     (name, cb, options, settings) => removeEventListener(ref, name, cb, asOption({...settings, ...options}))
