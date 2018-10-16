@@ -2,6 +2,7 @@ import * as React from 'react';
 import {attach, CallEvent, detach, getEventNames} from "./eventManager";
 import {eventTypes, injectorTypes} from "./propTypes";
 
+type Hash = { [key:string]: any};
 export type CallbackRef = (ref: EventTarget | null) => any;
 type RenderCallback = (ref: CallbackRef) => React.ReactNode | null;
 
@@ -15,8 +16,8 @@ interface State {
   injectedEvents: CallEvent[];
 };
 
-function pick<T extends object>(names: Array<keyof T>, data: T, options: any): CallEvent[] {
-  return names.reduce((acc, name) => {
+function pick<T extends Hash>(names: Array<keyof T>, data: T, options: any): CallEvent[] {
+  return names.reduce((acc, name: string) => {
     acc.push({name, options, cb: data[name]});
     return acc;
   }, [] as CallEvent[]);
