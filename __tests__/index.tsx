@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {mount} from 'enzyme';
-import {EventInjector, TargetedInjector} from "../src";
+import {EventInjector, PassiveListener, TargetedInjector} from "../src";
 
 //jest.mock('../src/eventListeners');
 
@@ -21,6 +21,24 @@ describe('Specs', () => {
     document.body.click();
     expect(spy).toHaveBeenCalled();
     document.body.click();
+    expect(spy).toHaveBeenCalledTimes(2);
+    wrapper.unmount();
+    document.body.click();
+    expect(spy).toHaveBeenCalledTimes(2);
+  });
+
+  it('target nested', () => {
+    const spy = jest.fn();
+    const spy2 = jest.fn();
+    const wrapper = mount(<PassiveListener onClick={spy}><TargetedInjector target={document.body}/></PassiveListener>);
+    document.body.click();
+    expect(spy).toHaveBeenCalled();
+    document.body.click();
+    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy2).toHaveBeenCalledTimes(0);
+    wrapper.setProps({onClick: spy2});
+    document.body.click();
+    expect(spy2).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenCalledTimes(2);
     wrapper.unmount();
     document.body.click();

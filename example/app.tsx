@@ -26,32 +26,36 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <Switcher>
-          <div><h2>PassiveListener</h2>
-            <PassiveListener
-              onClick={() => console.log('passive.click')}
-            >
-              <button>passive button</button>
-            </PassiveListener>
-          </div>
-        </Switcher>
+        {/*<Switcher>*/}
+          {/*<div><h2>PassiveListener</h2>*/}
+            {/*<PassiveListener*/}
+              {/*onClick={() => console.log('passive.click')}*/}
+            {/*>*/}
+              {/*<button>passive button</button>*/}
+            {/*</PassiveListener>*/}
+          {/*</div>*/}
+        {/*</Switcher>*/}
 
-        <Switcher>
-          <div><h2>Injector</h2>
-            <EventInjector
-              onClick={() => console.log('injector.click')}
-            >
-              <button>injected button</button>
-            </EventInjector>
-          </div>
-        </Switcher>
+        {/*<Switcher>*/}
+          {/*<div><h2>Injector</h2>*/}
+            {/*<EventInjector*/}
+              {/*onClick={() => console.log('injector.click')}*/}
+            {/*>*/}
+              {/*<button>injected button</button>*/}
+            {/*</EventInjector>*/}
+          {/*</div>*/}
+        {/*</Switcher>*/}
 
         <Switcher>
           <div><h2>TargetedListener</h2>
-            <TargetedInjector
-              onClick={() => console.log('targeted.click')}
-              target={() => document.querySelector('#target-button')}
-            />
+            <PassiveListener
+              onClick={() => console.log('passive-targeted.click')}
+            >
+              <TargetedInjector
+                onClick={() => console.log('targeted.click')}
+                target={() => document.querySelector('#target-button')}
+              />
+            </PassiveListener>
             <button id="target-button">target button</button>
           </div>
         </Switcher>

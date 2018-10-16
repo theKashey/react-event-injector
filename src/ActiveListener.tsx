@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {EventInjector, InjectorProps} from "./Injector";
 
-const PASSIVE = {passive: true};
+const ACTIVE = {passive: false};
 
-export class PassiveListener<T extends EventTarget> extends React.Component<InjectorProps<T>> {
+export class ActiveListener<T extends EventTarget> extends React.Component<InjectorProps<T>> {
   ref = React.createRef<EventTarget>();
 
   addEventListener = (name: string, cb: any, options: boolean | AddEventListenerOptions) => {
@@ -22,7 +22,7 @@ export class PassiveListener<T extends EventTarget> extends React.Component<Inje
     return (
       <EventInjector
         {...this.props}
-        settings={PASSIVE}
+        settings={ACTIVE}
         ref={this.ref as any}
       />
     );
