@@ -1,8 +1,10 @@
 import * as React from 'react';
+// @ts-ignore
+import * as invariant from 'tiny-invariant';
 import {attach, CallEvent, detach, getEventNames} from "./eventManager";
 import {eventTypes, injectorTypes} from "./propTypes";
 
-type Hash = { [key:string]: any};
+type Hash = { [key: string]: any };
 export type CallbackRef = (ref: EventTarget | null) => any;
 type RenderCallback = (ref: CallbackRef) => React.ReactNode | null;
 
@@ -75,6 +77,9 @@ export class EventInjector<T extends EventTarget> extends React.Component<Inject
       if (this.ref) {
         detach(this.ref, pick(getEventNames(this.props), this.props, settings));
         detach(this.ref, this.state.injectedEvents);
+      }
+      if (ref) {
+        invariant(ref.addEventListener, 'React-event-injector: Target should be EventTarget compatible, or any DOM Element');
       }
       this.ref = ref;
       if (this.ref) {

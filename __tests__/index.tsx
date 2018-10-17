@@ -27,6 +27,18 @@ describe('Specs', () => {
     expect(spy).toHaveBeenCalledTimes(2);
   });
 
+  it('wrong target', () => {
+    const spy = jest.fn();
+
+    class Block extends React.Component {
+      render() {
+        return 42
+      }
+    }
+
+    expect(() => mount(<EventInjector onClick={spy}><Block/></EventInjector>)).toThrow();
+  });
+
   it('target nested', () => {
     const spy = jest.fn();
     const spy2 = jest.fn();
