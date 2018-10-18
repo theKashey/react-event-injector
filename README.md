@@ -14,7 +14,7 @@
 
 -----
 Declarative React event manager, slim as 1kb. 
-Uses _standard_ addEventListener underneath, and able to overpass current [React API Limitations](https://github.com/facebook/react/issues/6436).
+Uses _standard_ addEventListener underneath, and able to overtake current [React API Limitations](https://github.com/facebook/react/issues/6436).
 
 Please - don't overuse this library, as long "React" way to attach events is
 far more performant, and better working with React itself. 
